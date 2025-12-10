@@ -5,19 +5,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Formulardaten parsen
+    // Formulardaten auslesen (HTML-Formular = application/x-www-form-urlencoded)
     const body = await req.text();
     const params = new URLSearchParams(body);
     const name = params.get('name');
     const email = params.get('email');
     const message = params.get('message');
 
-    // Sicherheitsprüfung
+    // Validierung: Alle Felder müssen ausgefüllt sein
     if (!name || !email || !message) {
       return res.status(400).json({ error: 'Alle Felder sind erforderlich.' });
     }
 
-    // E-Mail an Resend senden
+    // E-Mail über Resend senden
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -25,8 +25,8 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'Kontakt <elber3763@gmail.com>', // ⚠️ Muss in Resend bestätigt sein!
-        to: 'elber3763@gmail.com',             // 📩 Ihre Empfänger-E-Mail
+        from: 'Kontakt <elber3763@gmail.com>', // ✅ Bestätigte Absender-E-Mail
+        to: 'elber3763@gmail.com',             // 📩 Empfänger-E-Mail
         subject: `Kontaktanfrage von ${name}`,
         html: `
           <p><strong>Name:</strong> ${name}</p>
@@ -37,16 +37,18 @@ export default async function handler(req, res) {
       })
     });
 
+    // Fehler bei Resend?
     if (!response.ok) {
       const err = await response.json();
       console.error('Resend Fehler:', err);
       return res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden.' });
     }
 
-    // ✅ Erfolg → Weiterleitung zu Ihrer Danke-Seite
+    // ✅ Alles gut → Weiterleitung zu Ihrer Danke-Seite
     return res.redirect(302, '/danke.html');
 
   } catch (error) {
+    // Interner Server-Fehler
     console.error('Server Error:', error);
     return res.status(500).json({ error: 'Interner Fehler.' });
   }
