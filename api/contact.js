@@ -4,17 +4,20 @@ export default async function handler(req, res) {
     return res.status(405).end('Method Not Allowed');
   }
 
-  const body = await req.text();
-  const params = new URLSearchParams(body);
-  const name = params.get('name');
-  const email = params.get('email');
-  const message = params.get('message');
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Alle Felder sind erforderlich.' });
-  }
-
   try {
+    // Formulardaten parsen
+    const body = await req.text();
+    const params = new URLSearchParams(body);
+    const name = params.get('name');
+    const email = params.get('email');
+    const message = params.get('message');
+
+    // Sicherheitsprüfung
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Alle Felder sind erforderlich.' });
+    }
+
+    // E-Mail an Resend senden
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -22,8 +25,8 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
       },
       body: JSON.stringify({
-        from: 'Kontakt <elber3763@gmail.com>', // ⚠️ muss in Resend bestätigt sein!
-        to: 'elber3763@gmail.com',                 // 📩 Ihre Empfänger-E-Mail
+        from: 'Kontakt <elber3763@gmail.com>', // ⚠️ Muss in Resend bestätigt sein!
+        to: 'elber3763@gmail.com',             // 📩 Ihre Empfänger-E-Mail
         subject: `Kontaktanfrage von ${name}`,
         html: `
           <p><strong>Name:</strong> ${name}</p>
@@ -35,7 +38,8 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      console.error('Resend Fehler:', await response.json());
+      const err = await response.json();
+      console.error('Resend Fehler:', err);
       return res.status(500).json({ error: 'E-Mail konnte nicht gesendet werden.' });
     }
 
