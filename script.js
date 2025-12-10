@@ -95,6 +95,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             setupContent(data);
             initInteractions();
+            
+            // ✅ KRITISCHER FIX: Galerie sofort starten, wenn Intro übersprungen wurde
+            if (isCMS || comingFromInternal) {
+                setTimeout(() => {
+                    if (window.galleryImages && window.galleryImages.length > 0) {
+                        console.log('🎨 Galerie wird gestartet (nach Daten-Laden)');
+                        startGalleryCenterShow(window.galleryImages);
+                    }
+                }, 800);
+            }
         })
         .catch(err => console.error(err));
 
@@ -207,7 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setText('hero-subline', data.heroSubline);
         setText('gallery-headline', data.galleryHeadline || "Die Kollektion");
         
+        // ✅ Galerie-Bilder in globale Variable speichern
         window.galleryImages = data.galerieBilder || [];
+        console.log('📸 Galerie-Bilder geladen:', window.galleryImages.length);
 
         setText('about-title', data.biografieTitel);
         setImg('about-img', data.kuenstlerFoto);
@@ -252,11 +264,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = document.getElementById('main-header');
         const gallerySection = document.getElementById('galerie');
 
-        // CLICK: EINTRETEN
+        // ✅ FIX: EINTRETEN-Button startet jetzt auch die Galerie
         if (enterBtn) {
             enterBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'auto' });
-                gsap.to(introLayer, { opacity: 0, duration: 1.5, onComplete: () => { introLayer.style.display = 'none'; }});
+                gsap.to(introLayer, { 
+                    opacity: 0, 
+                    duration: 1.5, 
+                    onComplete: () => { 
+                        introLayer.style.display = 'none';
+                        
+                        // ✅ Galerie sofort nach Intro starten
+                        if (window.galleryImages && window.galleryImages.length > 0) {
+                            console.log('🎨 Galerie wird nach Intro gestartet');
+                            startGalleryCenterShow(window.galleryImages);
+                        }
+                    }
+                });
                 
                 const heroHeadline = document.getElementById('hero-headline');
                 const heroSubline = document.getElementById('hero-subline');
@@ -274,17 +298,35 @@ document.addEventListener('DOMContentLoaded', () => {
             viewCollectionBtn.addEventListener('click', () => {
                 header.classList.remove('opacity-0', 'pointer-events-none');
                 gallerySection.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => { startGalleryCenterShow(window.galleryImages); }, 1000);
+                
+                // ✅ Galerie neu starten, wenn noch nicht läuft
+                setTimeout(() => { 
+                    const stage = document.getElementById('gallery-stage');
+                    if (stage && stage.innerHTML.trim() === "" && window.galleryImages && window.galleryImages.length > 0) {
+                        console.log('🎨 Galerie wird manuell gestartet');
+                        startGalleryCenterShow(window.galleryImages); 
+                    }
+                }, 1000);
             });
         }
     }
 
     // --- GALERIE SHOW ---
     function startGalleryCenterShow(allImages) {
-        if (typeof gsap === 'undefined' || !allImages || allImages.length === 0) return;
+        if (typeof gsap === 'undefined' || !allImages || allImages.length === 0) {
+            console.warn('⚠️ Galerie kann nicht gestartet werden:', { gsap: typeof gsap, images: allImages?.length });
+            return;
+        }
 
         const stage = document.getElementById('gallery-stage');
-        if(!stage || stage.innerHTML.trim() !== "") return; 
+        if(!stage) {
+            console.warn('⚠️ Gallery-Stage nicht gefunden');
+            return;
+        }
+        
+        // ✅ WICHTIG: Stage leeren, aber nicht abbrechen wenn schon Inhalt da ist
+        stage.innerHTML = "";
+        console.log('🎬 Galerie-Show startet mit', allImages.length, 'Bildern');
 
         const chunks = [];
         for (let i = 0; i < allImages.length; i += 3) {
