@@ -1,0 +1,29 @@
+name: Generate Lockfile
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  create-lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies (Generates lockfile)
+        run: npm install
+
+      - name: Commit package-lock.json
+        run: |
+          git config --global user.name "Repair Bot"
+          git config --global user.email "bot@noreply.github.com"
+          git add package-lock.json
+          git commit -m "Fix: Add missing package-lock.json for TinaCloud" || echo "No changes to commit"
+          git push
