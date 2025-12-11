@@ -1,0 +1,17 @@
+{
+  "name": "nico-art-gallery",
+  "version": "1.0.0",
+  "description": "Künstler Portfolio mit TinaCMS",
+  "scripts": {
+    "dev": "tinacms dev -c \"npx serve .\"",
+    "build": "tinacms build",
+    "postinstall": "tinacms build"
+  },
+  "dependencies": {
+    "@tinacms/cli": "^1.6.4",
+    "tinacms": "^2.2.5"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
