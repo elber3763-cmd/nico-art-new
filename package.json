@@ -1,6 +1,7 @@
 {
   "name": "nico-art-new",
   "version": "1.0.0",
+   "type": "module",
   "description": "Nico Art Gallery TinaCMS",
   "main": "index.js",
   "scripts": {
