@@ -1,7 +1,6 @@
 {
   "name": "nico-art-new",
   "version": "1.0.0",
-  "type": "module",
   "description": "Nico Art Gallery TinaCMS",
   "scripts": {
     "dev": "tinacms dev -c \"npx http-server .\"",
