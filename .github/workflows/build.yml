@@ -26,6 +26,6 @@ jobs:
 
       - name: Build TinaCMS
         env:
-          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+ # Client ID ist jetzt fest in config.js, wir brauchen hier nur noch das Token
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
         run: npm run build
