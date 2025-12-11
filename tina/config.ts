@@ -1,13 +1,16 @@
 import { defineConfig } from "tinacms";
 
+// KEIN process.env mehr! Wir schreiben es hart rein.
 const branch = "main";
 
 export default defineConfig({
   branch,
+  
   // HIER IHRE ID VOM DASHBOARD EINFÜGEN
-  clientId: "HIER_DIE_CLIENT_ID",
+  clientId: "5b001291-6215-4877-b8de-246afdb97074",
+  
   // HIER IHR TOKEN VOM DASHBOARD EINFÜGEN
-  token: "HIER_DAS_TOKEN",
+  token: "c291c3765c7b903671f4dbe9f1194a1284fa430b",
 
   build: {
     outputFolder: "admin",
