@@ -1,0 +1,32 @@
+{
+  "intro": {
+    "title": "NICO ART",
+    "subtitle": "Digitale & Analoge Kunst",
+    "body": "Willkommen in meiner Welt der Farben und Formen. Entdecken Sie Werke, die Geschichten erzählen.",
+    "artistImage": "https://res.cloudinary.com/dk8wfpiwz/image/upload/v1/sample.jpg"
+  },
+  "about": {
+    "title": "Der Künstler",
+    "text": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Ich bin Nico, ein leidenschaftlicher Künstler, der die Grenzen zwischen Realität und Abstraktion erforscht."
+            }
+          ]
+        }
+      ]
+    },
+    "image": "https://res.cloudinary.com/dk8wfpiwz/image/upload/v1/sample.jpg"
+  },
+  "contact": {
+    "phone": "+49 123 456789",
+    "email": "kontakt@nico-art.de",
+    "whatsapp": "+49 123 456789",
+    "footerName": "Nico Art Gallery"
+  }
+}
