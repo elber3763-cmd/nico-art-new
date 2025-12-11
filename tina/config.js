@@ -1,14 +1,15 @@
-const { defineConfig } = require("tinacms");
+import { defineConfig } from "tinacms";
 
-module.exports = defineConfig({
-  // 1. Branch fest eintragen
-  branch: "main",
+// Fester Branch
+const branch = "main";
 
-  // 2. Client ID fest eintragen (Ihre ID vom Projekt!)
+export default defineConfig({
+  branch,
+  
+  // HIER IHRE CLIENT ID REINKOPIEREN (Vom Dashboard Overview)
   clientId: "5b001291-6215-4877-b8de-246afdb97074",
 
-  // 3. Token fest eintragen (Das kopierte Token!)
-  // Das ist der entscheidende Fix für den Scanner!
+  // HIER IHR TOKEN REINKOPIEREN (Vom Dashboard Tokens -> Read Only)
   token: "c291c3765c7b903671f4dbe9f1194a1284fa430b",
 
   build: {
@@ -39,7 +40,7 @@ module.exports = defineConfig({
         path: "content/settings",
         format: "json",
         fields: [
-          { type: "string", name: "title", label: "Seitentitel" }
+          { type: "string", name: "title", label: "Titel" }
         ]
       }
     ],
