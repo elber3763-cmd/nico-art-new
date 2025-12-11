@@ -1,0 +1,36 @@
+name: TinaCMS Build
+
+# Wann soll der Build starten? Immer wenn auf 'main' gepusht wird.
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    name: Build TinaCMS
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Code herunterladen
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Node.js Umgebung vorbereiten (Version 18 ist stabil für Tina)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # 3. Abhängigkeiten installieren
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. TinaCMS Build ausführen
+      # WICHTIG: Hier werden die Secrets in den Build injiziert!
+      - name: Build TinaCMS
+        env:
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+        run: npm run build
