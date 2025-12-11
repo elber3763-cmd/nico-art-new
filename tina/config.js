@@ -7,10 +7,10 @@ module.exports = defineConfig({
   branch,
   
   // HIER IHRE CLIENT ID VOM DASHBOARD (Prüfen Sie, ob es die 5b00... ist!)
-  clientId: "HIER_DIE_CLIENT_ID_EINFUEGEN",
+  clientId: "5b001291-6215-4877-b8de-246afdb97074",
   
   // HIER IHR TOKEN VOM DASHBOARD
-  token: "HIER_DAS_TOKEN_EINFUEGEN",
+  token: "c291c3765c7b903671f4dbe9f1194a1284fa430b",
 
   build: {
     outputFolder: "admin",
