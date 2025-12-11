@@ -6,7 +6,7 @@ export default defineConfig({
   branch,
   // ACHTUNG: Ersetzen Sie den Text zwischen den Anführungszeichen mit Ihrer echten ID!
   // Die Anführungszeichen "" müssen stehen bleiben.
-  clientId: "HIER_IHRE_ECHTE_ID_EINFUEGEN",
+  clientId: "0f2c73e2-5ea5-4ed7-a343-64a458ce87ae",
   token: process.env.TINA_TOKEN,
 
   build: {
