@@ -1,17 +1,19 @@
 {
-  "name": "nico-art-gallery",
+  "name": "nico-art-new",
   "version": "1.0.0",
-  "description": "Künstler Portfolio mit TinaCMS",
+  "description": "Nico Art Gallery TinaCMS",
+  "main": "index.js",
   "scripts": {
-    "dev": "tinacms dev -c \"npx serve .\"",
-    "build": "tinacms build",
-    "postinstall": "tinacms build"
+    "dev": "tinacms dev -c \"npx http-server .\"",
+    "build": "tinacms build"
   },
   "dependencies": {
-    "@tinacms/cli": "^1.6.4",
-    "tinacms": "^2.2.5"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tinacms": "^1.6.0"
   },
   "devDependencies": {
-    "serve": "^14.2.1"
+    "@tinacms/cli": "^1.6.0",
+    "http-server": "^14.1.1"
   }
 }
