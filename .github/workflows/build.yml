@@ -1,6 +1,5 @@
 name: TinaCMS Build
 
-# Wann soll der Build starten? Immer wenn auf 'main' gepusht wird.
 on:
   push:
     branches:
@@ -12,23 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Code herunterladen
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Node.js Umgebung vorbereiten (Version 18 ist stabil für Tina)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
 
-      # 3. Abhängigkeiten installieren
+      # HIER IST DIE ÄNDERUNG: 'npm install' statt 'npm ci'
+      # Das repariert den Fehler mit der package-lock.json
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
-      # 4. TinaCMS Build ausführen
-      # WICHTIG: Hier werden die Secrets in den Build injiziert!
       - name: Build TinaCMS
         env:
           TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
