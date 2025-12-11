@@ -4,7 +4,7 @@ const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
 export default defineConfig({
   branch,
-clientId: "HIER_IHRE_ID_REINKOPIEREN", 
+clientId: "clientId: "HIER_IHRE_ID_REINKOPIEREN",
   token: process.env.TINA_TOKEN, // Das Token lassen wir sicher als Secret!
 
   build: {
