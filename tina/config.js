@@ -6,7 +6,7 @@ const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 export default defineConfig({
   branch,
   // Ihre ID
-  clientId: "0f2c73e2-5ea5-4ed7-a343-64a458ce87ae",
+  clientId: "5b001291-6215-4877-b8de-246afdb97074",
   // Token
   token: process.env.TINA_TOKEN || "",
 
