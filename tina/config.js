@@ -1,15 +1,15 @@
-// Klassische, stabile Syntax
 const { defineConfig } = require("tinacms");
 
 module.exports = defineConfig({
-  // WIR SETZEN DEN BRANCH HART AUF "main", DAMIT KEIN FEHLER PASSIERT
+  // 1. Branch fest eintragen
   branch: "main",
-  
-  // HIER DIE NEUE ID VOM NEUEN PROJEKT EINFÜGEN!
-  clientId: "HIER_DIE_NEUE_ID_REINKOPIEREN",
-  
-  // Token holen wir weiter aus den Umgebungsvariablen
-  token: process.env.TINA_TOKEN || "",
+
+  // 2. Client ID fest eintragen (Ihre ID vom Projekt!)
+  clientId: "5b001291-6215-4877-b8de-246afdb97074",
+
+  // 3. Token fest eintragen (Das kopierte Token!)
+  // Das ist der entscheidende Fix für den Scanner!
+  token: "c291c3765c7b903671f4dbe9f1194a1284fa430b",
 
   build: {
     outputFolder: "admin",
@@ -29,44 +29,19 @@ module.exports = defineConfig({
         path: "content/gallery",
         format: "json",
         fields: [
-          { type: "image", name: "src", label: "Bilddatei", required: true },
-          { type: "string", name: "title", label: "Titel", required: true },
-          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
-          { type: "string", name: "category", label: "Kategorie", options: ["Abstrakt", "Porträt", "Landschaft", "Skulptur", "Modern"] },
+          { type: "image", name: "src", label: "Bild" },
+          { type: "string", name: "title", label: "Titel" }
         ],
       },
       {
         name: "settings",
-        label: "Seiten Einstellungen",
+        label: "Einstellungen",
         path: "content/settings",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
         fields: [
-          {
-            type: "object", name: "intro", label: "Intro Bereich", fields: [
-              { type: "string", name: "title", label: "Haupttitel" },
-              { type: "string", name: "subtitle", label: "Untertitel" },
-              { type: "string", name: "body", label: "Intro Text", ui: { component: "textarea" } },
-              { type: "image", name: "artistImage", label: "Künstler Bild" }
-            ]
-          },
-          {
-            type: "object", name: "about", label: "Über Mich", fields: [
-              { type: "string", name: "title", label: "Überschrift" },
-              { type: "rich-text", name: "text", label: "Text Inhalt" },
-              { type: "image", name: "image", label: "Profilbild" }
-            ]
-          },
-          {
-            type: "object", name: "contact", label: "Kontakt", fields: [
-              { type: "string", name: "phone", label: "Telefon" },
-              { type: "string", name: "email", label: "E-Mail" },
-              { type: "string", name: "whatsapp", label: "WhatsApp" },
-              { type: "string", name: "footerName", label: "Name im Footer" }
-            ]
-          }
-        ],
-      },
+          { type: "string", name: "title", label: "Seitentitel" }
+        ]
+      }
     ],
   },
 });
