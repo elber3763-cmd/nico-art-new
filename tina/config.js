@@ -1,13 +1,14 @@
-import { defineConfig } from "tinacms";
+// Wir nutzen 'require' statt 'import' - das ist stabiler
+const { defineConfig } = require("tinacms");
 
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
-export default defineConfig({
+module.exports = defineConfig({
   branch,
-  // ACHTUNG: Ersetzen Sie den Text zwischen den Anführungszeichen mit Ihrer echten ID!
-  // Die Anführungszeichen "" müssen stehen bleiben.
+  // Ihre echte ID (bitte stehen lassen)
   clientId: "0f2c73e2-5ea5-4ed7-a343-64a458ce87ae",
-  token: process.env.TINA_TOKEN,
+  // Token mit Fallback, damit es beim Indexieren nicht abstürzt
+  token: process.env.TINA_TOKEN || "",
 
   build: {
     outputFolder: "admin",
@@ -65,7 +66,6 @@ export default defineConfig({
           }
         ],
       },
-      // TinaCloud Verbindungstest
     ],
   },
 });
