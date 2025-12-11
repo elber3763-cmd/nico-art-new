@@ -1,13 +1,13 @@
-const { defineConfig } = require("tinacms");
+import { defineConfig } from "tinacms";
 
-// Branch-Logik
+// Branch Logik
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 
-module.exports = defineConfig({
+export default defineConfig({
   branch,
-  // Ihre ID (fest eingetragen)
+  // Ihre ID
   clientId: "0f2c73e2-5ea5-4ed7-a343-64a458ce87ae",
-  // Token (kommt aus den Secrets)
+  // Token
   token: process.env.TINA_TOKEN || "",
 
   build: {
