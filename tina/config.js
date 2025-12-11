@@ -1,15 +1,12 @@
 const { defineConfig } = require("tinacms");
 
-// Fester Branch
-const branch = "main";
-
 module.exports = defineConfig({
-  branch,
+  branch: "main",
   
-  // HIER IHRE CLIENT ID VOM DASHBOARD (Prüfen Sie, ob es die 5b00... ist!)
+  // HIER IHRE CLIENT ID
   clientId: "5b001291-6215-4877-b8de-246afdb97074",
   
-  // HIER IHR TOKEN VOM DASHBOARD
+  // HIER IHR TOKEN
   token: "c291c3765c7b903671f4dbe9f1194a1284fa430b",
 
   build: {
@@ -22,25 +19,15 @@ module.exports = defineConfig({
       publicFolder: "./",
     },
   },
+  // Wir testen mit einer leeren Collection-Liste, um Schema-Fehler auszuschließen
   schema: {
     collections: [
       {
-        name: "gallery",
-        label: "Galerie",
-        path: "content/gallery",
-        format: "json",
+        name: "test",
+        label: "Test",
+        path: "content/test",
         fields: [
-          { type: "image", name: "src", label: "Bild" },
-          { type: "string", name: "title", label: "Titel" }
-        ],
-      },
-      {
-        name: "settings",
-        label: "Einstellungen",
-        path: "content/settings",
-        format: "json",
-        fields: [
-          { type: "string", name: "title", label: "Seitentitel" }
+           { type: "string", name: "title", label: "Title" }
         ]
       }
     ],
