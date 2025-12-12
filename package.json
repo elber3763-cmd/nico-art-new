@@ -4,7 +4,7 @@
   "description": "Nico Art Gallery TinaCMS",
   "scripts": {
     "dev": "tinacms dev -c \"npx http-server .\"",
-    "build": "tinacms build",
+    "build": "next build",
     "start": "npx http-server ."
   },
   "dependencies": {
