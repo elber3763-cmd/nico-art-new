@@ -11,7 +11,7 @@ export default defineConfig({
 
   build: {
     outputFolder: "admin",
-    publicFolder: ".", // Punkt für aktuelles Verzeichnis
+    publicFolder: "public", // Punkt für aktuelles Verzeichnis
   },
   media: {
     tina: {
