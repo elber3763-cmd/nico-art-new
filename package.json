@@ -2,21 +2,20 @@
   "name": "dein-projekt",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tinacms dev -c \"npm run next:dev\"",
-    "next:dev": "next dev",
+    "dev": "tinacms dev -c \"next dev\"",
     "build": "tinacms build && next build",
-    "start": "next start",
-    "export": "next export"
+    "start": "next start"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tinacms": "^2.0.0",
-    "tinacms-authjs": "^1.0.0"
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tinacms": "^2.2.0"
   },
   "devDependencies": {
     "@tinacms/cli": "^1.6.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
     "typescript": "^5.0.0"
   }
 }
