@@ -7,7 +7,7 @@ export default defineConfig({
   
   // Deine IDs vom Tina Dashboard
   clientId: "5b001291-6215-4877-b8de-246afdb97074",
-  token: "c291c3765c7b903671f4dbe9f1194a1284fa430b",
+  token: "f189bca59542b20bfa03cabe9237193f7a399d17",
   
   build: {
     outputFolder: "admin",
