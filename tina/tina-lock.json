@@ -1,0 +1,14 @@
+# Öffne die Datei und füge eine Leerzeile hinzu
+echo "" >> .tina/__generated__/tina-lock.json
+
+# Commit und push
+git add .tina/__generated__/tina-lock.json
+git commit -m "Force TinaCloud re-index"
+git push origin main
+```
+
+**2. Stelle sicher, dass der `.tina` Ordner vollständig im Repository ist**
+
+Überprüfe deine `.gitignore` und stelle sicher, dass diese Zeile NICHT drin ist:
+```
+.tina/__generated__/
