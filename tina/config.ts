@@ -1,7 +1,6 @@
 import { defineConfig } from "tinacms";
 
-// Ändere "main" zu deinem tatsächlichen Branch-Namen (z.B. "master")
-const branch = process.env.NEXT_PUBLIC_TINA_BRANCH || "master";
+const branch = "main";
 
 export default defineConfig({
   branch,
